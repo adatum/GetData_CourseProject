@@ -71,11 +71,13 @@ subjects <- rbind(
                 read.table(file.path(data_fullpath, subject_test_file)), 
                 read.table(file.path(data_fullpath, subject_train_file))
                 )
+names(subjects) <- "subjects"
                 
 labels <- rbind(
                 read.table(file.path(data_fullpath, datalabels_test_file)), 
                 read.table(file.path(data_fullpath, datalabels_train_file))
                 )
+names(labels) <- "labels"
 
 activity_labels <- read.table(file.path(data_fullpath, activity_labels_file)) 
 
