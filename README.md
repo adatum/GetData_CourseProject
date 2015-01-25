@@ -9,5 +9,13 @@ run_analysis.R is an R script for joining and tidying the Human Activity Recogni
 - the script will automatically download, unzip, and process the data, or
 - if the data is already available locally, put the zipped file called `data.zip` in a directory called `data` in your workding directory. i.e. `./data/data.zip`
 
+###What it does:  
+1. joins the separate training and test data sets into one data set
+2. adds descriptive activity labels
+3. adds descriptive, column-legal feature/variable names
+4. subsets the data to include only mean and standard deviation measurments
+5. outputs a tidy data set of the average values of the data subset for each subject and activity
 
+###Output:
+`tidydata.txt` which has dimensions 180x88 (180 rows = 30 subjects X 6 activities; 88 columns = 86 features + subjects + activities)
 
