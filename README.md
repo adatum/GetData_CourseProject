@@ -21,5 +21,5 @@ run_analysis.R is an R script for joining and tidying the Human Activity Recogni
   
     
 --------    
-_Note:_ The text of `tidydata.txt` appears to have the subjects and activities as rows. This is due to the way `write.table` outputs the file, however the data frame/table in R will have the expected 180x88 dimensions.
+_Note:_ The text of `tidydata.txt` may appear to have the subjects and activities as rows. This is due to the way `write.table` outputs the file, however the data frame/table in R will have the expected 180x88 dimensions.
 
