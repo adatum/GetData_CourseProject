@@ -71,13 +71,11 @@ subjects <- rbind(
                 read.table(file.path(data_fullpath, subject_test_file)), 
                 read.table(file.path(data_fullpath, subject_train_file))
                 )
-names(subjects) <- "subjects"
                 
 labels <- rbind(
                 read.table(file.path(data_fullpath, datalabels_test_file)), 
                 read.table(file.path(data_fullpath, datalabels_train_file))
                 )
-names(labels) <- "labels"
 
 activity_labels <- read.table(file.path(data_fullpath, activity_labels_file)) 
 
@@ -85,8 +83,29 @@ features <- read.table(file.path(data_fullpath, features_file),
                        row.names=1                                
                        )
 
+# use descriptive activity labels (lowercase alphabet only)
+activity_labels$V2 <- tolower(gsub("[^[:alpha:]]", "", activity_labels$V2))
+labels <- mapvalues(labels$V1, activity_labels$V1, activity_labels$V2)
+
+# make feature labels valid column names
+features <- gsub("[^[:alnum:]]", "", make.names(features$V2, unique=T))
+
+# use descriptive column/variable names on data set
+setnames(data, names(data), features)
+
+# subset data for only the mean and standard deviation for each measurement 
+subdata <- data[, grep("mean|std", colnames(data), ignore.case=T), with=F]
+
+# add subject info and activity labels to subset data
+subdata <- cbind("subject" = subjects$V1, "activity" = labels, subdata)
+
+tidydata <- subdata %>%
+        group_by(subject, activity) %>%
+        summarise_each(funs(mean))
 
 
+#alternatively using data table:
+# tidydata <- subdata[, lapply(.SD, mean), by=.(subject, activity)]
 
-
-
+# output tidydata.txt
+write.table(tidydata, file="tidydata.txt", row.names=F)

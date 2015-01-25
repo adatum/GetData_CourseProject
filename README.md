@@ -1,5 +1,6 @@
-Getting and Cleaning Data -- Course Project
-========
+Getting and Cleaning Data  
+==========  
+###**Course Project**  
 
 run_analysis.R is an R script for joining and tidying the Human Activity Recognition Using Smartphones data set (UCI HAR Dataset) available from the UCI Machine Learning Repository available [here](http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones) where a full description can be found.
 
