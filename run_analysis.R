@@ -99,10 +99,14 @@ subdata <- data[, grep("mean|std", colnames(data), ignore.case=T), with=F]
 # add subject info and activity labels to subset data
 subdata <- cbind("subject" = subjects$V1, "activity" = labels, subdata)
 
+# create tidy data of average of each variable for each subject and each activity
 tidydata <- subdata %>%
         group_by(subject, activity) %>%
         summarise_each(funs(mean))
 
+# set new colnames prepended by "avg" for measurements
+cn <- colnames(tidydata)[-(1:2)]
+setnames(tidydata, cn, sub("*", "avg\\1", cn))
 
 #alternatively using data table:
 # tidydata <- subdata[, lapply(.SD, mean), by=.(subject, activity)]
